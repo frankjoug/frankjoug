@@ -17,82 +17,30 @@
       --border: #21262d;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'SF Mono', Consolas, monospace;
-      line-height: 1.5;
-    }
+    body { background: var(--bg); color: var(--text); font-family: 'SF Mono', Consolas, monospace; line-height: 1.5; }
     .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-    }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
     .logo { color: var(--red); font-weight: 700; font-size: 1.3rem; }
     nav a { color: var(--blue); margin-left: 1.2rem; text-decoration: none; font-size: 0.9rem; }
     nav a:hover { color: var(--pink); }
-    .hero {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 2.5rem;
-      align-items: center;
-      padding: 3rem 0;
-    }
-    .hero-img {
-      width: 100%;
-      border-radius: 12px;
-      border: 2px solid var(--border);
-      object-fit: cover;
-      height: 340px;
-    }
+    .hero { display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: center; padding: 3rem 0; }
+    .hero-img { width: 100%; border-radius: 12px; border: 2px solid var(--border); object-fit: cover; height: 340px; }
     .prompt { color: var(--green); margin-bottom: 0.5rem; }
     h1 { font-size: 2.8rem; color: var(--red); letter-spacing: -1px; margin: 0.3rem 0; }
     .roles { color: var(--pink); font-size: 1.1rem; margin-bottom: 1rem; }
     .bio { color: var(--muted); margin-bottom: 1.5rem; max-width: 520px; }
     .btns { display: flex; gap: 0.8rem; }
-    .btn {
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      border: 1px solid var(--border);
-    }
+    .btn { padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border); }
     .btn-primary { background: #2d1b1b; color: var(--red); border-color: #3d2b2b; }
     .btn-secondary { color: var(--blue); }
     section { margin: 3rem 0; }
     h2 { color: var(--blue); margin-bottom: 1rem; font-size: 1.1rem; }
-    .card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.2rem 1.5rem;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-    .gallery img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-    }
-    footer {
-      text-align: center;
-      padding: 2rem 0;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    @media (max-width: 700px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
-      .hero-img { height: 280px; max-width: 280px; margin: 0 auto; }
-    }
+    .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+    .gallery img { width: 100%; height: 240px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
+    footer { text-align: center; padding: 2rem 0; color: var(--muted); border-top: 1px solid var(--border); margin-top: 3rem; }
+    a { color: var(--blue); }
+    @media (max-width: 700px) { .hero { grid-template-columns: 1fr; text-align: center; } .hero-img { height: 280px; max-width: 280px; margin: 0 auto; } }
   </style>
 </head>
 <body>
@@ -108,7 +56,7 @@
     </header>
 
     <section class="hero">
-      <img class="hero-img" src="https://i.imgur.com/placeholder-hero.jpg" alt="frankyoug">
+      <img class="hero-img" src="images/hero.jpg" alt="frankyoug" onerror="this.src='https://via.placeholder.com/280x340/161b22/8b949e?text=Sube+tu+foto'">
       <div>
         <p class="prompt">> hola_mundo</p>
         <h1>frankyoug</h1>
@@ -116,7 +64,7 @@
         <p class="bio">Aventuras en la montaña, viajes, libros y un toque geek. Alter ego de un mexicano-nórdico con moño y barba.</p>
         <div class="btns">
           <a class="btn btn-primary" href="#estilo">> ver_fotos</a>
-          <a class="btn btn-secondary" href="#redes">> conectar</a>
+          <a class="btn btn-secondary" href="https://www.instagram.com/frankyoug94/" target="_blank">> conectar</a>
         </div>
         <p style="margin-top:1rem; color:var(--muted); font-size:0.85rem;">// STATUS: en línea <span style="color:var(--green)">●</span></p>
       </div>
@@ -130,6 +78,7 @@
         <p><strong>origen:</strong> mezcla mexicana + nórdica</p>
         <p><strong>estilo:</strong> outdoor + moda premium</p>
         <p><strong>misión:</strong> subir cumbres, leer, viajar y vivir experiencias.</p>
+        <p><strong>ig:</strong> <a href="https://www.instagram.com/frankyoug94/" target="_blank">@frankyoug94</a></p>
       </div>
     </section>
 
@@ -146,18 +95,19 @@
     <section id="estilo">
       <h2>$ ls ./estilo</h2>
       <div class="gallery">
-        <img src="https://i.imgur.com/placeholder1.jpg" alt="Look 1">
-        <img src="https://i.imgur.com/placeholder2.jpg" alt="Look 2">
-        <img src="https://i.imgur.com/placeholder3.jpg" alt="Look 3">
-        <img src="https://i.imgur.com/placeholder4.jpg" alt="Look 4">
+        <img src="images/look1.jpg" alt="Look 1" onerror="this.src='https://via.placeholder.com/200x240/161b22/8b949e?text=Look+1'">
+        <img src="images/look2.jpg" alt="Look 2" onerror="this.src='https://via.placeholder.com/200x240/161b22/8b949e?text=Look+2'">
+        <img src="images/look3.jpg" alt="Look 3" onerror="this.src='https://via.placeholder.com/200x240/161b22/8b949e?text=Look+3'">
+        <img src="images/look4.jpg" alt="Look 4" onerror="this.src='https://via.placeholder.com/200x240/161b22/8b949e?text=Look+4'">
       </div>
-      <p style="margin-top:1rem; color:var(--muted); font-size:0.85rem;">Sube tus fotos al repo y cambia los links, o pásame las URLs.</p>
+      <p style="margin-top:1rem; color:var(--muted); font-size:0.85rem;">Sube tus fotos a la carpeta <strong>images/</strong> del repositorio (hero.jpg, look1.jpg, etc.).</p>
     </section>
 
     <section id="redes">
       <h2>$ conectar --todas</h2>
       <div class="card">
-        <p>Instagram · GitHub · etc. (añade tus links aquí)</p>
+        <p><a href="https://www.instagram.com/frankyoug94/" target="_blank">Instagram @frankyoug94</a></p>
+        <p><a href="https://github.com/frankjoug" target="_blank">GitHub</a></p>
       </div>
     </section>
 
