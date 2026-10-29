@@ -135,6 +135,13 @@ a{color:var(--cyan)}
 
 <section id="evolucion">
 <h2>$ ./evolucion</h2>
+<div class="card">
+<h3>🦖 Juego: Evolución Dino</h3>
+<p>Como el dinosaurio del navegador cuando se va el internet: salta los obstáculos con Espacio, tocando la pantalla o con el botón Saltar. Mientras más puntos, más evolucionas.</p>
+<canvas id="dino-game" width="800" height="200" style="width:100%;background:#0a0e14;border:1px solid var(--cyan);border-radius:10px"></canvas>
+<p>Etapa: <strong id="dino-stage">👶 Bebé</strong> · Puntuación: <strong id="dino-score">0</strong> · <span id="dino-status">Pulsa Jugar para empezar</span></p>
+<p><button class="btn btn-primary" id="dino-start">Jugar / Reiniciar</button> <button class="btn" id="dino-jump">Saltar</button></p>
+</div>
 <div class="mermaid">
 flowchart LR
     A[👶 Bebé<br/>Curiosidad] --> B[🧒 Niño<br/>Aprender jugando]
@@ -216,6 +223,61 @@ function follow(){
 follow();
 document.addEventListener('mousedown', ()=>katana.classList.add('click'));
 document.addEventListener('mouseup', ()=>katana.classList.remove('click'));
+
+// Juego Dino de evolución, estilo navegador sin internet
+const dc = document.getElementById('dino-game');
+const dctx = dc.getContext('2d');
+const dScore = document.getElementById('dino-score');
+const dStage = document.getElementById('dino-stage');
+const dStatus = document.getElementById('dino-status');
+let dinoY = 140, dinoVy = 0, dinoJumping = false, dObstacles = [], dScoreVal = 0, dRunning = false, dFrame = 0;
+function dinoStageFor(score){
+  if(score < 100) return '👶 Bebé';
+  if(score < 300) return '🧒 Niño';
+  if(score < 600) return '🧑 Adolescente';
+  if(score < 1000) return '🧑‍💻 Joven';
+  return '👨 Hombre';
+}
+function dinoEmojiFor(score){
+  if(score < 100) return '🐣';
+  if(score < 300) return '🦖';
+  if(score < 600) return '🦕';
+  if(score < 1000) return '🏃';
+  return '🦸';
+}
+function dinoStart(){
+  dObstacles = []; dScoreVal = 0; dinoY = 140; dinoVy = 0; dinoJumping = false; dRunning = true;
+  dStatus.textContent = '¡Corre! Salta con Espacio';
+  requestAnimationFrame(dinoLoop);
+}
+function dinoJump(){
+  if(!dRunning) return;
+  if(!dinoJumping){ dinoVy = -14; dinoJumping = true; }
+}
+function dinoLoop(){
+  if(!dRunning) return;
+  dFrame++;
+  dctx.clearRect(0, 0, dc.width, dc.height);
+  dctx.fillStyle = '#00e5ff'; dctx.fillRect(0, 175, dc.width, 2);
+  // suelo y jugador
+  if(dinoJumping){ dinoY += dinoVy; dinoVy += 0.9; if(dinoY >= 140){ dinoY = 140; dinoJumping = false; } }
+  dctx.font = '44px serif'; dctx.fillText(dinoEmojiFor(dScoreVal), 60, dinoY + 40);
+  // obstáculos
+  if(dFrame % 90 === 0) dObstacles.push({x: dc.width, w: 24, h: 30 + Math.random()*20});
+  dObstacles.forEach(o=>{ o.x -= 6 + Math.floor(dScoreVal/200); dctx.font = '32px serif'; dctx.fillText('🌵', o.x, 175); });
+  dObstacles = dObstacles.filter(o=>o.x > -40);
+  dScoreVal++;
+  dScore.textContent = dScoreVal;
+  dStage.textContent = dinoStageFor(dScoreVal);
+  // colisión simple
+  const hit = dObstacles.some(o=>o.x < 100 && o.x > 50 && dinoY > 110);
+  if(hit){ dRunning = false; dStatus.textContent = 'Fin del juego. Pulsa Jugar / Reiniciar para volver a empezar.'; return; }
+  requestAnimationFrame(dinoLoop);
+}
+document.getElementById('dino-start').addEventListener('click', dinoStart);
+document.getElementById('dino-jump').addEventListener('click', dinoJump);
+document.addEventListener('keydown', e=>{ if(e.code === 'Space'){ e.preventDefault(); if(!dRunning) dinoStart(); else dinoJump(); } });
+dc.addEventListener('click', ()=>{ if(!dRunning) dinoStart(); else dinoJump(); });
 </script>
 </body>
 </html>
