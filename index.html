@@ -51,6 +51,16 @@ h2{color:var(--cyan);margin-bottom:1rem;font-size:1.1rem}
 .mermaid{background:#fff;border-radius:10px;padding:1rem;overflow:auto;color:#000}
 footer{text-align:center;padding:2rem 0;color:var(--muted);border-top:1px solid var(--border);margin-top:3rem}
 a{color:var(--cyan)}
+.lang-bar{display:flex;gap:.4rem;flex-wrap:wrap}
+.lang-bar button{background:transparent;border:1px solid var(--border);color:var(--text);padding:.3rem .6rem;border-radius:6px;font-family:inherit}
+.lang-bar button.active{background:#0a2233;color:var(--cyan);border-color:var(--cyan)}
+.carousel{position:relative;text-align:center}
+.carousel img{width:100%;max-width:560px;height:420px;object-fit:cover;border-radius:12px;border:2px solid var(--cyan);box-shadow:0 0 30px rgba(0,229,255,.25)}
+.carousel-caption{color:var(--pink);margin-top:.8rem;font-size:1.1rem}
+.carousel-controls{display:flex;justify-content:center;gap:1rem;margin-top:1rem;align-items:center}
+.carousel-dots{display:flex;gap:.4rem;justify-content:center;margin-top:.8rem}
+.carousel-dots button{width:12px;height:12px;border-radius:50%;border:1px solid var(--cyan);background:transparent;padding:0}
+.carousel-dots button.active{background:var(--cyan)}
 @media (max-width:700px){.hero{grid-template-columns:1fr;text-align:center}.hero-img{margin:0 auto}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
@@ -61,19 +71,9 @@ a{color:var(--cyan)}
 <div class="scanlines"></div>
 <div class="grid-bg"></div>
 
-<!-- Katana japonesa en tonos de madera, como cursor -->
+<!-- Katana del usuario, como cursor: la imagen que envió, siguiendo al ratón -->
 <div id="katana-cursor" aria-hidden="true">
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-<g transform="rotate(-45 32 32)">
-<polygon points="30,2 34,2 34,28 30,28" fill="#dbeafe" stroke="#58a6ff" stroke-width="1"/>
-<rect x="27" y="28" width="10" height="4" fill="#5c3317"/>
-<rect x="28" y="32" width="8" height="20" fill="#8b5a2b"/>
-<rect x="28" y="36" width="8" height="2" fill="#d2b48c"/>
-<rect x="28" y="42" width="8" height="2" fill="#d2b48c"/>
-<rect x="28" y="48" width="8" height="2" fill="#a0522d"/>
-<rect x="29" y="52" width="6" height="4" fill="#5c3317"/>
-</g>
-</svg>
+<img src="katana-cursor.png" alt="" width="64" height="70" style="width:64px;height:auto">
 </div>
 
 <div class="container">
@@ -87,7 +87,11 @@ a{color:var(--cyan)}
 <a href="#musica">./musica</a>
 <a href="#proyectos">./proyectos</a>
 <a href="#redes">./redes</a>
+<a href="#galeria">./galeria</a>
 </nav>
+<div class="lang-bar" id="lang-bar">
+<button data-lang="es" class="active">ES</button><button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="it">IT</button><button data-lang="ja">JA</button><button data-lang="zh">ZH</button><button data-lang="de">DE</button>
+</div>
 </header>
 
 <main>
@@ -103,6 +107,17 @@ a{color:var(--cyan)}
 <p class="roles">Filántropo · Ingeniero de seguridad · Fotógrafo · Creador de contenido</p>
 <p class="bio">Seguridad de día, fotografía y contenido con estética cyberpunk. Me mueve aprender, crear y devolver algo a la comunidad. Bienvenido a mi rincón en la red: lo que construyo, lo que aprendo y en lo que creo.</p>
 <p><a class="btn btn-primary" href="https://github.com/frankjoug">&gt; ver_mi_código</a> <a class="btn" href="#musica">&gt; mi_música</a></p>
+</div>
+</section>
+
+<section id="galeria">
+<h2>$ ./galeria</h2>
+<p id="galeria-p">Mis versiones: cyberpunk, samurái, ninja, Ryu y karategi negro. Usa las flechas o los puntos para cambiar de foto.</p>
+<div class="carousel">
+<img id="carousel-img" src="6cfe0d9f-c566-49c3-ae64-71fdde49fae9.png" alt="Frankjoug — galería">
+<p class="carousel-caption" id="carousel-caption">Cyberpunk</p>
+<div class="carousel-controls"><button class="btn" id="carousel-prev">◀ Anterior</button><button class="btn btn-primary" id="carousel-next">Siguiente ▶</button></div>
+<div class="carousel-dots" id="carousel-dots"></div>
 </div>
 </section>
 
@@ -224,6 +239,66 @@ follow();
 document.addEventListener('mousedown', ()=>katana.classList.add('click'));
 document.addEventListener('mouseup', ()=>katana.classList.remove('click'));
 
+// Carrusel de la galería
+const carouselItems = [
+  {src:'6cfe0d9f-c566-49c3-ae64-71fdde49fae9.png', caps:{es:'Cyberpunk',en:'Cyberpunk',fr:'Cyberpunk',it:'Cyberpunk',ja:'サイバーパンク',zh:'赛博朋克',de:'Cyberpunk'}},
+  {src:'media-generation-frankjoug-samurai-0-b31d2448-7501-40f1-8c10-b7831f3b4ba6.webp', caps:{es:'Samurái',en:'Samurai',fr:'Samouraï',it:'Samurai',ja:'侍',zh:'武士',de:'Samurai'}},
+  {src:'media-generation-frankjoug-ninja-0-26905fb4-63be-450f-a951-a82d8dc5497b.webp', caps:{es:'Ninja',en:'Ninja',fr:'Ninja',it:'Ninja',ja:'忍者',zh:'忍者',de:'Ninja'}},
+  {src:'media-generation-frankjoug-ryu-0-51cde487-4914-4870-af0d-728aea19e6a8.webp', caps:{es:'Ryu de Street Fighter',en:'Ryu from Street Fighter',fr:'Ryu de Street Fighter',it:'Ryu di Street Fighter',ja:'ストリートファイターのリュウ',zh:'街头霸王的隆',de:'Ryu aus Street Fighter'}},
+  {src:'media-generation-frankjoug-karategi-negro-0-b1e8b04e-c6b7-4811-84b4-7f8172871bf8.webp', caps:{es:'Karategi negro',en:'Black karategi',fr:'Karategi noir',it:'Karategi nero',ja:'黒い空手着',zh:'黑色空手道服',de:'Schwarzer Karategi'}}
+];
+let carouselIndex = 0, carouselLang = 'es';
+const cImg = document.getElementById('carousel-img'), cCap = document.getElementById('carousel-caption'), cDots = document.getElementById('carousel-dots');
+carouselItems.forEach((_,i)=>{ const b=document.createElement('button'); b.addEventListener('click',()=>showCarousel(i)); cDots.appendChild(b); });
+function showCarousel(i){
+  carouselIndex = (i + carouselItems.length) % carouselItems.length;
+  cImg.src = carouselItems[carouselIndex].src;
+  cCap.textContent = carouselItems[carouselIndex].caps[carouselLang];
+  [...cDots.children].forEach((d,j)=>d.classList.toggle('active', j===carouselIndex));
+}
+document.getElementById('carousel-prev').addEventListener('click',()=>showCarousel(carouselIndex-1));
+document.getElementById('carousel-next').addEventListener('click',()=>showCarousel(carouselIndex+1));
+setInterval(()=>{ if(!document.hidden) showCarousel(carouselIndex+1); }, 5000);
+showCarousel(0);
+
+// Idiomas: español, inglés, francés, italiano, japonés, chino y alemán
+const I18N = {
+  es:{nav:['./whoami','./seguridad','./metricas','./evolucion','./musica','./proyectos','./redes','./galeria'],roles:'Filántropo · Ingeniero de seguridad · Fotógrafo · Creador de contenido',bio:'Seguridad de día, fotografía y contenido con estética cyberpunk. Me mueve aprender, crear y devolver algo a la comunidad. Bienvenido a mi rincón en la red: lo que construyo, lo que aprendo y en lo que creo.',btn1:'> ver_mi_código',btn2:'> mi_música',whoami:'$ whoami',areas:'$ ls ./areas',areaT:['01 // SEGURIDAD','02 // FOTOGRAFÍA','03 // CONTENIDO','04 // FILANTROPÍA'],areaD:['Ingeniería de seguridad y hacking ético. Tecnología aplicada para entender sistemas y protegerlos.','Retrato, calle y paisaje, con ojo editorial y encuadre preciso.','Creación de contenido con producción cuidada y estética moderna.','Proyectos con impacto social, sin perder la estética ni el oficio.'],metrics:'$ cat ./metricas',metricsP:'Estas son mis métricas de GitHub, también visibles en la página principal de mi README:',evol:'$ ./evolucion',dinoT:'🦖 Juego: Evolución Dino',dinoP:'Como el dinosaurio del navegador cuando se va el internet: salta los obstáculos con Espacio, tocando la pantalla o con el botón Saltar. Mientras más puntos, más evolucionas.',music:'$ play ./musica',musicT:'Solo se vive una vez',musicP:'Mi playlist en Spotify, para codear de día y soñar de noche.',proj:'$ ls ./proyectos',projT:'frankjoug/frankjoug',projP:'Mi repositorio de perfil: escalador · viajero · lector · geek.',redes:'$ conectar --todas',redesP:'// encuéntrame en la red — elige tu canal',galeria:'$ ./galeria',galeriaP:'Mis versiones: cyberpunk, samurái, ninja, Ryu y karategi negro. Usa las flechas o los puntos para cambiar de foto.',prev:'◀ Anterior',next:'Siguiente ▶',footer:'frankjoug // Seguridad · Foto · Contenido · Comunidad',status:'// STATUS: en línea ●'},
+  en:{nav:['./whoami','./security','./metrics','./evolution','./music','./projects','./social','./gallery'],roles:'Philanthropist · Security engineer · Photographer · Content creator',bio:'Security by day, photography and content with a cyberpunk aesthetic. I love to learn, create and give back to the community. Welcome to my corner of the web: what I build, what I learn and what I believe in.',btn1:'> view_my_code',btn2:'> my_music',whoami:'$ whoami',areas:'$ ls ./areas',areaT:['01 // SECURITY','02 // PHOTOGRAPHY','03 // CONTENT','04 // PHILANTHROPY'],areaD:['Security engineering and ethical hacking. Technology applied to understand systems and protect them.','Portrait, street and landscape, with an editorial eye and precise framing.','Content creation with careful production and a modern aesthetic.','Projects with social impact, without losing aesthetics or craft.'],metrics:'$ cat ./metrics',metricsP:'These are my GitHub metrics, also visible on the main page of my README:',evol:'$ ./evolution',dinoT:'🦖 Game: Dino Evolution',dinoP:'Like the browser dinosaur when the internet goes out: jump the obstacles with Space, by tapping the screen or with the Jump button. The more points, the more you evolve.',music:'$ play ./music',musicT:'Solo se vive una vez',musicP:'My Spotify playlist, for coding by day and dreaming by night.',proj:'$ ls ./projects',projT:'frankjoug/frankjoug',projP:'My profile repository: climber · traveler · reader · geek.',redes:'$ connect --all',redesP:'// find me online — choose your channel',galeria:'$ ./gallery',galeriaP:'My versions: cyberpunk, samurai, ninja, Ryu and black karategi. Use the arrows or dots to change the photo.',prev:'◀ Previous',next:'Next ▶',footer:'frankjoug // Security · Photo · Content · Community',status:'// STATUS: online ●'},
+  fr:{nav:['./whoami','./securite','./metriques','./evolution','./musique','./projets','./reseaux','./galerie'],roles:'Philanthrope · Ingénieur en sécurité · Photographe · Créateur de contenu',bio:'Sécurité le jour, photographie et contenu avec une esthétique cyberpunk. J’aime apprendre, créer et redonner à la communauté. Bienvenue dans mon coin du web : ce que je construis, ce que j’apprends et ce en quoi je crois.',btn1:'> voir_mon_code',btn2:'> ma_musique',whoami:'$ whoami',areas:'$ ls ./domaines',areaT:['01 // SÉCURITÉ','02 // PHOTOGRAPHIE','03 // CONTENU','04 // PHILANTHROPIE'],areaD:['Ingénierie de sécurité et hacking éthique. Une technologie appliquée pour comprendre les systèmes et les protéger.','Portrait, rue et paysage, avec un regard éditorial et un cadrage précis.','Création de contenu avec une production soignée et une esthétique moderne.','Projets à impact social, sans perdre l’esthétique ni le savoir-faire.'],metrics:'$ cat ./metriques',metricsP:'Voici mes métriques GitHub, également visibles sur la page principale de mon README :',evol:'$ ./evolution',dinoT:'🦖 Jeu : Évolution Dino',dinoP:'Comme le dinosaure du navigateur quand internet coupe : saute les obstacles avec Espace, en touchant l’écran ou avec le bouton Sauter. Plus tu gagnes de points, plus tu évolues.',music:'$ play ./musique',musicT:'Solo se vive una vez',musicP:'Ma playlist Spotify, pour coder le jour et rêver la nuit.',proj:'$ ls ./projets',projT:'frankjoug/frankjoug',projP:'Mon dépôt de profil : grimpeur · voyageur · lecteur · geek.',redes:'$ connecter --tous',redesP:'// retrouvez-moi en ligne — choisissez votre canal',galeria:'$ ./galerie',galeriaP:'Mes versions : cyberpunk, samouraï, ninja, Ryu et karategi noir. Utilisez les flèches ou les points pour changer de photo.',prev:'◀ Précédent',next:'Suivant ▶',footer:'frankjoug // Sécurité · Photo · Contenu · Communauté',status:'// STATUT : en ligne ●'},
+  it:{nav:['./whoami','./sicurezza','./metriche','./evoluzione','./musica','./progetti','./social','./galleria'],roles:'Filantropo · Ingegnere della sicurezza · Fotografo · Creatore di contenuti',bio:'Sicurezza di giorno, fotografia e contenuti con estetica cyberpunk. Mi piace imparare, creare e restituire qualcosa alla comunità. Benvenuto nel mio angolo del web: quello che costruisco, quello che imparo e in cui credo.',btn1:'> vedi_il_mio_codice',btn2:'> la_mia_musica',whoami:'$ whoami',areas:'$ ls ./aree',areaT:['01 // SICUREZZA','02 // FOTOGRAFIA','03 // CONTENUTI','04 // FILANTROPIA'],areaD:['Ingegneria della sicurezza e hacking etico. Tecnologia applicata per capire i sistemi e proteggerli.','Ritratto, strada e paesaggio, con occhio editoriale e inquadratura precisa.','Creazione di contenuti con produzione curata ed estetica moderna.','Progetti con impatto sociale, senza perdere estetica né mestiere.'],metrics:'$ cat ./metriche',metricsP:'Queste sono le mie metriche GitHub, visibili anche nella pagina principale del mio README:',evol:'$ ./evoluzione',dinoT:'🦖 Gioco: Evoluzione Dino',dinoP:'Come il dinosauro del browser quando manca internet: salta gli ostacoli con Spazio, toccando lo schermo o con il pulsante Salta. Più punti fai, più evolvi.',music:'$ play ./musica',musicT:'Solo se vive una volta',musicP:'La mia playlist Spotify, per programmare di giorno e sognare di notte.',proj:'$ ls ./progetti',projT:'frankjoug/frankjoug',projP:'Il mio repository di profilo: scalatore · viaggiatore · lettore · geek.',redes:'$ connetti --tutti',redesP:'// trovami online — scegli il tuo canale',galeria:'$ ./galleria',galeriaP:'Le mie versioni: cyberpunk, samurai, ninja, Ryu e karategi nero. Usa le frecce o i punti per cambiare foto.',prev:'◀ Precedente',next:'Successiva ▶',footer:'frankjoug // Sicurezza · Foto · Contenuti · Comunità',status:'// STATO: online ●'},
+  ja:{nav:['./whoami','./セキュリティ','./メトリクス','./進化','./音楽','./プロジェクト','./SNS','./ギャラリー'],roles:'慈善家 · セキュリティエンジニア · 写真家 · コンテンツクリエイター',bio:'昼はセキュリティ、夜はサイバーパンクな美学の写真とコンテンツ。学び、作り、コミュニティに還元することが好きです。私が作るもの、学ぶもの、信じるものを紹介するウェブの片隅へようこそ。',btn1:'> コードを見る',btn2:'> 私の音楽',whoami:'$ whoami',areas:'$ ls ./分野',areaT:['01 // セキュリティ','02 // 写真','03 // コンテンツ','04 // 慈善活動'],areaD:['セキュリティエンジニアリングと倫理的ハッキング。システムを理解し、守るための技術。','ポートレート、ストリート、風景。編集的な目と正確な構図で。','丁寧な制作とモダンな美学によるコンテンツ制作。','美学と職人技を失わず、社会に影響を与えるプロジェクト。'],metrics:'$ cat ./メトリクス',metricsP:'READMEのメインページでも見られる、私のGitHubメトリクスです：',evol:'$ ./進化',dinoT:'🦖 ゲーム：ディノ進化',dinoP:'インターネットが切れたときのブラウザの恐竜のように：スペースキー、画面タップ、ジャンプボタンで障害物を跳び越えよう。ポイントが増えるほど進化します。',music:'$ play ./音楽',musicT:'Solo se vive una vez',musicP:'私のSpotifyプレイリスト。昼はコーディング、夜は夢を見るために。',proj:'$ ls ./プロジェクト',projT:'frankjoug/frankjoug',projP:'私のプロフィールリポジトリ：クライマー · 旅行者 · 読者 · ギーク。',redes:'$ 接続 --すべて',redesP:'// オンラインで見つけてください — チャンネルを選んでください',galeria:'$ ./ギャラリー',galeriaP:'私のバージョン：サイバーパンク、侍、忍者、リュウ、黒い空手着。矢印やドットで写真を切り替えられます。',prev:'◀ 前へ',next:'次へ ▶',footer:'frankjoug // セキュリティ · 写真 · コンテンツ · コミュニティ',status:'// ステータス：オンライン ●'},
+  zh:{nav:['./whoami','./安全','./指标','./进化','./音乐','./项目','./社交','./画廊'],roles:'慈善家 · 安全工程师 · 摄影师 · 内容创作者',bio:'白天做安全，晚上做具有赛博朋克美学的摄影和内容。我喜欢学习、创作并回馈社区。欢迎来到我的网络角落：我建造的东西、我学习的东西和我相信的东西。',btn1:'> 查看我的代码',btn2:'> 我的音乐',whoami:'$ whoami',areas:'$ ls ./领域',areaT:['01 // 安全','02 // 摄影','03 // 内容','04 // 慈善'],areaD:['安全工程与道德黑客。用于理解系统并保护系统的技术。','人像、街头和风景，具有编辑眼光和精确构图。','制作精良、美学现代的内容创作。','具有社会影响力的项目，同时不失去美学与手艺。'],metrics:'$ cat ./指标',metricsP:'这是我的GitHub指标，在我的README主页上也可以看到：',evol:'$ ./进化',dinoT:'🦖 游戏：恐龙进化',dinoP:'就像断网时浏览器里的恐龙：用空格键、触摸屏幕或跳跃按钮跳过障碍。分数越高，进化越多。',music:'$ play ./音乐',musicT:'Solo se vive una vez',musicP:'我的Spotify歌单，白天编程，夜晚做梦。',proj:'$ ls ./项目',projT:'frankjoug/frankjoug',projP:'我的个人资料仓库：攀岩者 · 旅行者 · 读者 · 极客。',redes:'$ 连接 --全部',redesP:'// 在网上找到我 — 选择你的频道',galeria:'$ ./画廊',galeriaP:'我的版本：赛博朋克、武士、忍者、隆和黑色空手道服。用箭头或圆点切换照片。',prev:'◀ 上一张',next:'下一张 ▶',footer:'frankjoug // 安全 · 摄影 · 内容 · 社区',status:'// 状态：在线 ●'},
+  de:{nav:['./whoami','./sicherheit','./metriken','./entwicklung','./musik','./projekte','./social','./galerie'],roles:'Philanthrop · Sicherheitsingenieur · Fotograf · Content Creator',bio:'Tagsüber Sicherheit, Fotografie und Inhalte mit Cyberpunk-Ästhetik. Ich lerne gern, erschaffe gern und gebe gern etwas an die Community zurück. Willkommen in meiner Ecke im Netz: was ich baue, was ich lerne und woran ich glaube.',btn1:'> meinen_code_ansehen',btn2:'> meine_musik',whoami:'$ whoami',areas:'$ ls ./bereiche',areaT:['01 // SICHERHEIT','02 // FOTOGRAFIE','03 // INHALTE','04 // PHILANTHROPIE'],areaD:['Sicherheitsengineering und ethisches Hacking. Technik, die Systeme versteht und schützt.','Porträt, Straße und Landschaft, mit redaktionellem Blick und präziser Bildgestaltung.','Content-Erstellung mit sorgfältiger Produktion und moderner Ästhetik.','Projekte mit sozialer Wirkung, ohne Ästhetik oder Handwerk zu verlieren.'],metrics:'$ cat ./metriken',metricsP:'Das sind meine GitHub-Metriken, auch auf der Hauptseite meines README sichtbar:',evol:'$ ./entwicklung',dinoT:'🦖 Spiel: Dino-Entwicklung',dinoP:'Wie der Browser-Dino, wenn das Internet ausfällt: Springe mit der Leertaste, per Fingertipp oder mit dem Springen-Button über Hindernisse. Je mehr Punkte, desto weiter entwickelst du dich.',music:'$ play ./musik',musicT:'Solo se vive una vez',musicP:'Meine Spotify-Playlist, zum Coden am Tag und Träumen in der Nacht.',proj:'$ ls ./projekte',projT:'frankjoug/frankjoug',projP:'Mein Profil-Repository: Kletterer · Reisender · Leser · Geek.',redes:'$ verbinden --alle',redesP:'// finde mich online — wähle deinen Kanal',galeria:'$ ./galerie',galeriaP:'Meine Versionen: Cyberpunk, Samurai, Ninja, Ryu und schwarzer Karategi. Nutze Pfeile oder Punkte, um das Foto zu wechseln.',prev:'◀ Zurück',next:'Weiter ▶',footer:'frankjoug // Sicherheit · Foto · Inhalte · Community',status:'// STATUS: online ●'}
+};
+function setLang(lang){
+  carouselLang = lang; document.documentElement.lang = lang;
+  const t = I18N[lang]; if(!t) return;
+  document.querySelectorAll('nav a').forEach((a,i)=>{ if(t.nav[i]) a.textContent = t.nav[i]; });
+  document.querySelectorAll('#lang-bar button').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+  const roles=document.querySelector('.roles'); if(roles) roles.textContent=t.roles;
+  const bio=document.querySelector('.bio'); if(bio) bio.textContent=t.bio;
+  const btns=document.querySelectorAll('.hero .btn'); if(btns[0]) btns[0].textContent=t.btn1; if(btns[1]) btns[1].textContent=t.btn2;
+  const setH=(id,val)=>{ const el=document.querySelector(id+' h2'); if(el) el.textContent=val; };
+  setH('#whoami',t.whoami); setH('#codigo',t.areas); setH('#metricas',t.metrics); setH('#evolucion',t.evol); setH('#musica',t.music); setH('#proyectos',t.proj); setH('#redes',t.redes); setH('#galeria',t.galeria);
+  document.querySelectorAll('#codigo .card').forEach((c,i)=>{ const h=c.querySelector('h3'), p=c.querySelector('p'); if(h) h.textContent=t.areaT[i]; if(p) p.textContent=t.areaD[i]; });
+  const mp=document.querySelector('#metricas p'); if(mp) mp.textContent=t.metricsP;
+  const dinoH=document.querySelector('#evolucion .card h3'); if(dinoH) dinoH.textContent=t.dinoT;
+  const dinoP=document.querySelector('#evolucion .card p'); if(dinoP) dinoP.textContent=t.dinoP;
+  const musicH=document.querySelector('#musica .card h3'); if(musicH) musicH.textContent=t.musicT;
+  const musicP=document.querySelector('#musica .card p'); if(musicP) musicP.textContent=t.musicP;
+  const projH=document.querySelector('#proyectos .card h3'); if(projH) projH.textContent=t.projT;
+  const projP=document.querySelector('#proyectos .card p'); if(projP) projP.textContent=t.projP;
+  const redesP=document.querySelector('#redes p'); if(redesP) redesP.textContent=t.redesP;
+  const galP=document.getElementById('galeria-p'); if(galP) galP.textContent=t.galeriaP;
+  const prev=document.getElementById('carousel-prev'); if(prev) prev.textContent=t.prev;
+  const next=document.getElementById('carousel-next'); if(next) next.textContent=t.next;
+  const cap=document.querySelector('.photo-caption'); if(cap) cap.textContent=t.status;
+  const foot=document.querySelector('footer'); if(foot) foot.textContent=t.footer;
+  showCarousel(carouselIndex);
+}
+document.querySelectorAll('#lang-bar button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+
 // Juego Dino de evolución, estilo navegador sin internet
 const dc = document.getElementById('dino-game');
 const dctx = dc.getContext('2d');
@@ -239,11 +314,8 @@ function dinoStageFor(score){
   return '👨 Hombre';
 }
 function dinoEmojiFor(score){
-  if(score < 100) return '🐣';
-  if(score < 300) return '🦖';
-  if(score < 600) return '🦕';
-  if(score < 1000) return '🏃';
-  return '🦸';
+  // Siempre el dinosaurio, que en su forma original mira a la izquierda y al voltearlo queda mirando a la derecha, como el dino de Chrome corriendo al frente. La evolución se muestra en el texto de etapa, no cambiando la dirección.
+  return '🦖';
 }
 function dinoStart(){
   dObstacles = []; dScoreVal = 0; dinoY = 140; dinoVy = 0; dinoJumping = false; dRunning = true;
@@ -261,7 +333,11 @@ function dinoLoop(){
   dctx.fillStyle = '#00e5ff'; dctx.fillRect(0, 175, dc.width, 2);
   // suelo y jugador
   if(dinoJumping){ dinoY += dinoVy; dinoVy += 0.9; if(dinoY >= 140){ dinoY = 140; dinoJumping = false; } }
-  dctx.font = '44px serif'; dctx.fillText(dinoEmojiFor(dScoreVal), 60, dinoY + 40);
+  // Figura mirando hacia la derecha, como si corriera al frente: se dibuja volteada horizontalmente
+  dctx.save();
+  dctx.translate(104, 0); dctx.scale(-1, 1);
+  dctx.font = '44px serif'; dctx.fillText(dinoEmojiFor(dScoreVal), 44, dinoY + 40);
+  dctx.restore();
   // obstáculos
   if(dFrame % 90 === 0) dObstacles.push({x: dc.width, w: 24, h: 30 + Math.random()*20});
   dObstacles.forEach(o=>{ o.x -= 6 + Math.floor(dScoreVal/200); dctx.font = '32px serif'; dctx.fillText('🌵', o.x, 175); });
@@ -274,9 +350,16 @@ function dinoLoop(){
   if(hit){ dRunning = false; dStatus.textContent = 'Fin del juego. Pulsa Jugar / Reiniciar para volver a empezar.'; return; }
   requestAnimationFrame(dinoLoop);
 }
-document.getElementById('dino-start').addEventListener('click', dinoStart);
-document.getElementById('dino-jump').addEventListener('click', dinoJump);
-document.addEventListener('keydown', e=>{ if(e.code === 'Space'){ e.preventDefault(); if(!dRunning) dinoStart(); else dinoJump(); } });
+document.getElementById('dino-start').addEventListener('click', e=>{ e.currentTarget.blur(); dinoStart(); });
+document.getElementById('dino-jump').addEventListener('click', e=>{ e.currentTarget.blur(); dinoJump(); });
+// Barra espaciadora: funciona aunque un botón haya quedado con el foco, porque los botones se desenfocan al pulsar y se evita el doble disparo del botón con Espacio
+document.addEventListener('keydown', e=>{
+  if(e.code === 'Space' || e.key === ' '){
+    e.preventDefault();
+    if(document.activeElement && document.activeElement.tagName === 'BUTTON') document.activeElement.blur();
+    if(!dRunning) dinoStart(); else dinoJump();
+  }
+});
 dc.addEventListener('click', ()=>{ if(!dRunning) dinoStart(); else dinoJump(); });
 </script>
 </body>
