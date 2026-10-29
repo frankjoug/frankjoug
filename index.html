@@ -96,6 +96,11 @@ a{color:var(--cyan)}
 .carousel-dots{display:flex;gap:.4rem;justify-content:center;margin-top:.8rem}
 .carousel-dots button{width:12px;height:12px;border-radius:50%;border:1px solid var(--cyan);background:transparent;padding:0}
 .carousel-dots button.active{background:var(--cyan)}
+.galeria-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.chiks-carousel{text-align:center}
+.chiks-carousel img{width:100%;max-width:560px;height:420px;object-fit:contain;background:#0a0e14;border-radius:12px;border:2px solid var(--pink);box-shadow:0 0 30px rgba(255,45,149,.25)}
+.chiks-carousel h3{color:var(--pink);margin-bottom:.8rem}
+@media (max-width:700px){.galeria-layout{grid-template-columns:1fr}}
 @media (max-width:700px){.hero{grid-template-columns:1fr;text-align:center}.hero-img{margin:0 auto}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
@@ -149,11 +154,19 @@ a{color:var(--cyan)}
 <section id="galeria">
 <h2>$ ./galeria</h2>
 <p id="galeria-p">Mis versiones: cyberpunk, samurái, ninja, Ryu y karategi negro. Usa las flechas o los puntos para cambiar de foto.</p>
+<div class="galeria-layout">
 <div class="carousel">
 <img id="carousel-img" src="images/6cfe0d9f-c566-49c3-ae64-71fdde49fae9.png" alt="Frankjoug — galería">
 <p class="carousel-caption" id="carousel-caption">Cyberpunk</p>
 <div class="carousel-controls"><button class="btn" id="carousel-prev">◀ Anterior</button><button class="btn btn-primary" id="carousel-next">Siguiente ▶</button></div>
 <div class="carousel-dots" id="carousel-dots"></div>
+</div>
+<div class="chiks-carousel">
+<h3>Mis chicas</h3>
+<img id="chiks-img" src="" alt="Mis chicas" style="display:none">
+<p id="chiks-status">Cargando fotos de images/chiks/…</p>
+<div class="carousel-controls"><button class="btn" id="chiks-prev">◀ Anterior</button><button class="btn btn-primary" id="chiks-next">Siguiente ▶</button></div>
+</div>
 </div>
 </section>
 
@@ -320,6 +333,41 @@ document.getElementById('carousel-prev').addEventListener('click',()=>showCarous
 document.getElementById('carousel-next').addEventListener('click',()=>showCarousel(carouselIndex+1));
 setInterval(()=>{ if(!document.hidden) showCarousel(carouselIndex+1); }, 5000);
 showCarousel(0);
+
+// Carrusel izquierdo: agrega automáticamente cualquier otra foto de /images/* que no esté ya en la lista
+fetch('https://api.github.com/repos/frankjoug/frankjoug/contents/images')
+  .then(r=>r.ok ? r.json() : [])
+  .then(files=>{
+    if(!Array.isArray(files)) return;
+    files.filter(f=>f.type==='file' && /\.(png|jpe?g|webp|gif)$/i.test(f.name)).forEach(f=>{
+      const src='images/'+f.name;
+      if(!carouselItems.some(it=>it.src===src)){
+        carouselItems.push({src, caps:{es:'',en:'',fr:'',it:'',ja:'',zh:'',de:''}});
+        const b=document.createElement('button'); const idx=carouselItems.length-1; b.addEventListener('click',()=>showCarousel(idx)); cDots.appendChild(b);
+      }
+    });
+  }).catch(()=>{});
+
+// Carrusel derecho: rota las imágenes de /images/chiks/*, cuando existan en el repo
+let chiksItems=[], chiksIndex=0;
+const chiksImg=document.getElementById('chiks-img'), chiksStatus=document.getElementById('chiks-status');
+function showChiks(i){
+  if(!chiksItems.length) return;
+  chiksIndex=(i+chiksItems.length)%chiksItems.length;
+  chiksImg.src=chiksItems[chiksIndex]; chiksImg.style.display='block';
+  chiksStatus.textContent='Foto '+(chiksIndex+1)+' de '+chiksItems.length+' en images/chiks/';
+}
+document.getElementById('chiks-prev').addEventListener('click',()=>showChiks(chiksIndex-1));
+document.getElementById('chiks-next').addEventListener('click',()=>showChiks(chiksIndex+1));
+setInterval(()=>{ if(!document.hidden && chiksItems.length) showChiks(chiksIndex+1); }, 4000);
+fetch('https://api.github.com/repos/frankjoug/frankjoug/contents/images/chiks')
+  .then(r=>{ if(!r.ok) throw new Error('sin carpeta'); return r.json(); })
+  .then(files=>{
+    if(!Array.isArray(files)) throw new Error('sin lista');
+    chiksItems=files.filter(f=>f.type==='file' && /\.(png|jpe?g|webp|gif)$/i.test(f.name)).map(f=>'images/chiks/'+f.name);
+    if(chiksItems.length) showChiks(0); else chiksStatus.textContent='Aún no hay fotos en images/chiks/ — cuando subas fotos ahí, rotarán solas aquí.';
+  })
+  .catch(()=>{ chiksStatus.textContent='Aún no hay fotos en images/chiks/ — cuando subas fotos ahí, rotarán solas aquí.'; });
 
 // Idiomas: español, inglés, francés, italiano, japonés, chino y alemán
 const I18N = {
