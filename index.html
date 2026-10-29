@@ -97,11 +97,11 @@ a{color:var(--cyan)}
 .carousel-dots button{width:12px;height:12px;border-radius:50%;border:1px solid var(--cyan);background:transparent;padding:0}
 .carousel-dots button.active{background:var(--cyan)}
 .galeria-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
-.conoceme-title{color:#00e5ff;text-shadow:0 0 10px #00e5ff,0 0 25px #00e5ff,0 0 45px #1e6fff;text-align:center;font-size:2.2rem;letter-spacing:.1em;margin:.5rem 0 1rem}
+.conoceme-title{color:#00e5ff;text-shadow:0 0 10px #00e5ff,0 0 25px #00e5ff,0 0 45px #1e6fff;text-align:center;font-size:1.17rem;margin:.5rem 0 .8rem}
 .galeria-logo{display:block;margin:0 auto 1rem;max-width:260px;width:100%;border-radius:12px}
 .chiks-carousel{text-align:center}
 .chiks-carousel img{width:100%;max-width:560px;height:420px;object-fit:contain;background:#0a0e14;border-radius:12px;border:2px solid var(--pink);box-shadow:0 0 30px rgba(255,45,149,.25)}
-.chiks-carousel h3{color:var(--pink);margin-bottom:.8rem}
+.chiks-carousel h3{color:var(--pink);margin-bottom:.8rem;font-size:1.17rem}
 @media (max-width:700px){.galeria-layout{grid-template-columns:1fr}}
 @media (max-width:700px){.hero{grid-template-columns:1fr;text-align:center}.hero-img{margin:0 auto}}
 </style>
@@ -169,6 +169,7 @@ a{color:var(--cyan)}
 <img id="chiks-img" src="" alt="Mis chicas" style="display:none">
 <p id="chiks-status">Cargando fotos de images/chiks/…</p>
 <div class="carousel-controls"><button class="btn" id="chiks-prev">◀ Anterior</button><button class="btn btn-primary" id="chiks-next">Siguiente ▶</button></div>
+<div class="carousel-dots" id="chiks-dots"></div>
 </div>
 </div>
 </section>
@@ -353,12 +354,13 @@ fetch('https://api.github.com/repos/frankjoug/frankjoug/contents/images')
 
 // Carrusel derecho: rota las imágenes de /images/chiks/*, cuando existan en el repo
 let chiksItems=[], chiksIndex=0;
-const chiksImg=document.getElementById('chiks-img'), chiksStatus=document.getElementById('chiks-status');
+const chiksImg=document.getElementById('chiks-img'), chiksStatus=document.getElementById('chiks-status'), chiksDots=document.getElementById('chiks-dots');
 function showChiks(i){
   if(!chiksItems.length) return;
   chiksIndex=(i+chiksItems.length)%chiksItems.length;
   chiksImg.src=chiksItems[chiksIndex]; chiksImg.style.display='block';
-  chiksStatus.textContent='Foto '+(chiksIndex+1)+' de '+chiksItems.length+' en images/chiks/';
+  chiksStatus.style.display='none';
+  [...chiksDots.children].forEach((d,j)=>d.classList.toggle('active', j===chiksIndex));
 }
 document.getElementById('chiks-prev').addEventListener('click',()=>showChiks(chiksIndex-1));
 document.getElementById('chiks-next').addEventListener('click',()=>showChiks(chiksIndex+1));
@@ -368,7 +370,7 @@ fetch('https://api.github.com/repos/frankjoug/frankjoug/contents/images/chiks')
   .then(files=>{
     if(!Array.isArray(files)) throw new Error('sin lista');
     chiksItems=files.filter(f=>f.type==='file' && /\.(png|jpe?g|webp|gif)$/i.test(f.name)).map(f=>'images/chiks/'+f.name);
-    if(chiksItems.length) showChiks(0); else chiksStatus.textContent='Aún no hay fotos en images/chiks/ — cuando subas fotos ahí, rotarán solas aquí.';
+    if(chiksItems.length){ chiksItems.forEach((_,idx)=>{ const b=document.createElement('button'); b.addEventListener('click',()=>showChiks(idx)); chiksDots.appendChild(b); }); showChiks(0); } else chiksStatus.textContent='Aún no hay fotos en images/chiks/ — cuando subas fotos ahí, rotarán solas aquí.';
   })
   .catch(()=>{ chiksStatus.textContent='Aún no hay fotos en images/chiks/ — cuando subas fotos ahí, rotarán solas aquí.'; });
 
