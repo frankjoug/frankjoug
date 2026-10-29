@@ -1,6 +1,6 @@
 # frankjoug
 
-![Frankjoug — versión cyberpunk](media-generation-frankjoug-cyberpunk-0-8fa790e0-43d2-4f2e-af18-857186425873.webp)
+![Frankjoug — versión cyberpunk](6cfe0d9f-c566-49c3-ae64-71fdde49fae9.png)
 
 ```text
 frankjoug@web:~$ neofetch
