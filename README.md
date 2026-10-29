@@ -15,6 +15,25 @@ GPU:     Visión en neón ✨
 status:  [ ACCESS GRANTED ]
 ```
 
+## 📊 Mis métricas en GitHub
+
+![Estadísticas de frankjoug](https://github-readme-stats.vercel.app/api?username=frankjoug&show_icons=true&theme=dark)
+![Lenguajes más usados](https://github-readme-stats.vercel.app/api/top-langs/?username=frankjoug&layout=compact&theme=dark)
+![Racha](https://github-readme-streak-stats.herokuapp.com/?user=frankjoug&theme=dark)
+
+> Estas métricas se generan con tu usuario frankjoug. Si al principio se ven bajas, es porque tu cuenta tiene 1 repositorio público y está empezando: crecerán a medida que publiques más proyectos y commits.
+
+## 🧬 Mi evolución
+
+```mermaid
+flowchart LR
+    A[👶 Bebé<br/>Curiosidad] --> B[🧒 Niño<br/>Aprender jugando]
+    B --> C[🧑 Adolescente<br/>Preguntar y probar]
+    C --> D[🧑‍💻 Joven<br/>Estudiar y crear]
+    D --> E[👨 Hombre<br/>Seguridad, foto y comunidad]
+    E --> F[🌱 Seguir creciendo<br/>Filantropía y oficio]
+```
+
 ## 🔭 En qué estoy trabajando
 
 - **Seguridad** — ingeniería de seguridad y hacking ético: entender sistemas para protegerlos
@@ -43,6 +62,7 @@ status:  [ ACCESS GRANTED ]
 ## ⭐️ Proyectos
 
 - [frankjoug/frankjoug](https://github.com/frankjoug/frankjoug) — mi repositorio de perfil: escalador · viajero · lector · geek
+- [Mi página](https://frankjoug.github.io/frankjoug/) — página personal estilo terminal, como la de frankjunker87-arch, adaptada a frankjoug
 
 ## ⚡ Dato curioso
 
