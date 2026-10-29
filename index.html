@@ -51,18 +51,20 @@ h2{color:var(--cyan);margin-bottom:1rem;font-size:1.1rem}
 .mermaid{background:transparent;border-radius:10px;padding:1rem;overflow:auto;color:var(--text)}
 .freud-diagram{background:transparent;border:1px solid var(--border);border-radius:12px;padding:1rem}
 .freud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.freud-bubble{border-radius:18px;padding:1rem;color:#111}
-.freud-bubble h3{color:#111;margin-bottom:.4rem}
+.freud-bubble{border-radius:18px;padding:1rem;color:#e5e7eb;border:1px solid var(--cyan);box-shadow:0 0 18px rgba(0,229,255,.18)}
+.freud-bubble h3{color:var(--cyan);margin-bottom:.4rem}
 .freud-bubble p{font-size:.9rem}
-.freud-center{grid-column:2;grid-row:2;background:#93c5fd;text-align:center}
-.freud-ello{background:#ffb6c9}
-.freud-yo{background:#c9b8ff}
-.freud-super{background:#7dd3fc}
-.freud-inconsciente{background:#bef264}
-.freud-preconsciente{background:#fde68a}
-.freud-consciente{background:#fca5a5}
-.freud-presentado{background:#fbbf24;text-align:center}
-.freud-referencia{background:#fef08a;font-size:.85rem}
+.freud-center{grid-column:2;grid-row:2;background:linear-gradient(135deg,#0a0a14,#2b0a3d,#0a2233);border-color:var(--pink);box-shadow:0 0 28px rgba(255,45,149,.35);text-align:center}
+.freud-center h3{color:var(--pink)}
+.freud-ello{background:#1a0b1e;border-color:#ff2d95}
+.freud-yo{background:#0a1226;border-color:#7b2ff7}
+.freud-super{background:#0a2233;border-color:#00e5ff}
+.freud-inconsciente{background:#0f1a0b;border-color:#3fb950;box-shadow:0 0 18px rgba(63,185,80,.25)}
+.freud-preconsciente{background:#1e1a08;border-color:#facc15;box-shadow:0 0 18px rgba(250,204,21,.22)}
+.freud-consciente{background:#1e0b12;border-color:#ff2d95}
+.freud-presentado{background:#12001f;border-color:#ff2d95;text-align:center}
+.freud-presentado h3{color:var(--pink)}
+.freud-referencia{background:#0a0a14;border-color:#58a6ff;font-size:.85rem}
 @media (max-width:700px){.freud-grid{grid-template-columns:1fr}.freud-center{grid-column:1;grid-row:auto}}
 footer{text-align:center;padding:2rem 0;color:var(--muted);border-top:1px solid var(--border);margin-top:3rem}
 a{color:var(--cyan)}
