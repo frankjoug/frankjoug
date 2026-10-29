@@ -5,7 +5,7 @@
 # frankjoug
 
 - Hi there 👋 I'm **frankjoug** — filántropo, ingeniero de seguridad, fotógrafo y creador de contenido, con estética cyberpunk 💻✨
-- [![Website][website-shield]][website-url] [![GitHub][github-shield]][github-url] [![Spotify][spotify-shield]][spotify-url]
+- [![Website][website-shield]][website-url] [![GitHub][github-shield]][github-url] [![Spotify][spotify-shield]][spotify-url] [![Threads][threads-shield]][threads-url] [![Instagram][instagram-shield]][instagram-url] [![LinkedIn][linkedin-shield]][linkedin-url]
 - 📫 How to reach me: through my [GitHub](https://github.com/frankjoug) — página y proyectos 📩
 
 <table>
@@ -89,6 +89,14 @@ flowchart LR
 - [Mi página](https://github.com/frankjoug/frankjoug/blob/main/index.html) — página personal estilo terminal, como la de frankjunker87-arch, adaptada a frankjoug
 - [Solo se vive una vez — Spotify](https://open.spotify.com/playlist/0J2v02jjfQ4VN7BUYd6HKT) — mi playlist para codear de día y soñar de noche
 
+## 🔗 Mis redes sociales
+
+- [Threads — @robertoherdandez](https://www.threads.com/@robertoherdandez)
+- [Instagram — @frankyoug94](https://www.instagram.com/frankyoug94/)
+- [GitHub — frankjoug](https://github.com/frankjoug)
+- [LinkedIn — frankjoug](https://www.linkedin.com/in/frankjoug/)
+- [Spotify — Solo se vive una vez](https://open.spotify.com/playlist/0J2v02jjfQ4VN7BUYd6HKT)
+
 ## ⚡ Fun fact: Trabajo la seguridad como la fotografía: precisión primero, encuadre siempre.
 
 ```console
@@ -112,6 +120,12 @@ frankjoug@web:~$ _
 [github-shield]: https://img.shields.io/badge/-GitHub-black.svg?style=for-the-badge&logo=github&colorB=ff2e88
 [spotify-url]: https://open.spotify.com/playlist/0J2v02jjfQ4VN7BUYd6HKT
 [spotify-shield]: https://img.shields.io/badge/-Spotify-black.svg?style=for-the-badge&logo=spotify&colorB=1db954
+[threads-url]: https://www.threads.com/@robertoherdandez
+[threads-shield]: https://img.shields.io/badge/-Threads-black.svg?style=for-the-badge&logo=threads&colorB=00e5ff
+[instagram-url]: https://www.instagram.com/frankyoug94/
+[instagram-shield]: https://img.shields.io/badge/-Instagram-black.svg?style=for-the-badge&logo=instagram&colorB=ff2e88
+[linkedin-url]: https://www.linkedin.com/in/frankjoug/
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=0a66c2
 
 ---
 
