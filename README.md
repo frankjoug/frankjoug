@@ -62,4 +62,4 @@ frankjoug@web:~$ _
 
 ---
 
-*Página inspirada en la estructura de perfil de [tec-girl](https://github.com/tec-girl), adaptada con la foto, los roles y la estética de frankjoug. Borrador para revisión, aún no publicado en GitHub.*
+*Página inspirada en la estructura de perfil de [tec-girl](https://github.com/tec-girl)*
